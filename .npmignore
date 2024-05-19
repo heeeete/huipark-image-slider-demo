@@ -1,4 +1,9 @@
-node_modules/
-src/
-public/
+node_modules
+src
+build
+public
+.gitignore
+.eslintrc.js
+*.config.js
+*.config.json
 tsconfig.json
