@@ -25,7 +25,7 @@ npm i simple-image-carousel
 | width | 슬라이더의 너비를 설정합니다. | null | number \| null |
 | height | 슬라이더의 높이를 설정합니다. | null | number \| null |
 | objectFit | 이미지를 맞추는 방식을 설정합니다. | fill | "fill" \| "contain" \| "cover" \| "none" \| "scale-down" |
-| dotColor | 점의 색상을 설정합니다. | RGB(0, 114, 255) | string |
+| dotColor | 점의 색상을 설정합니다. | rgb(0, 114, 255) | string |
 | dotHoverColor | 점을 마우스로 가리킬 때의 색상을 설정합니다. | rgb(135, 135, 135) | string |
 | dotBorderColor | 점의 테두리 색상을 설정합니다. | rgb(152, 152, 152) | string |
 | arrowColor | 화살표의 색상을 설정합니다. | white | string |
@@ -92,7 +92,7 @@ The image slider supports lazy loading by default, loading images as they come i
 | width | Sets the width of the slider. | null | number \| null |
 | height | Sets the height of the slider. | null | number \| null |
 | objectFit | Sets the object fit mode for the images. | fill | "fill" \| "contain" \| "cover" \| "none" \| "scale-down" |
-| dotColor | Sets the color of the dots. | RGB(0, 114, 255) | string |
+| dotColor | Sets the color of the dots. | rgb(0, 114, 255) | string |
 | dotHoverColor | Sets the color of the dots when hovered over. | rgb(135, 135, 135) | string |
 | dotBorderColor | Sets the border color of the dots. | rgb(152, 152, 152) | string |
 | arrowColor | Sets the color of the arrows. | white | string |
