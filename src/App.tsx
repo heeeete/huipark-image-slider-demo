@@ -5,10 +5,10 @@ import { HexColorPicker } from "react-colorful";
 import Select, { StylesConfig } from "react-select";
 
 const images = [
-	{ url: "/1.jpg" },
-	{ url: "/2.jpeg" },
-	{ url: "/3.jpg" },
-	{ url: "/5.png" },
+	{ url: "https://heeeete.github.io/huipark-image-slider-demo/1.jpg" },
+	{ url: "https://heeeete.github.io/huipark-image-slider-demo/2.jpeg" },
+	{ url: "https://heeeete.github.io/huipark-image-slider-demo/3.jpg" },
+	{ url: "https://heeeete.github.io/huipark-image-slider-demo/5.png" },
 ];
 
 interface ObjectFitProps {
@@ -40,6 +40,9 @@ function App() {
 	const [isArrowColor, setIsArrowColor] = useState<boolean>(false);
 	const [width, setWidth] = useState<number>(500);
 	const [height, setHeight] = useState<number>(300);
+	const [borderRadius, setBorderRadius] = useState<number>(0);
+	const [autoSlider, setAutoSlider] = useState<number>(0);
+	const [duration, setDuration] = useState<number>(300);
 	const colorPickersRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -72,13 +75,6 @@ function App() {
 		}
 	};
 
-	const widthChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setWidth(Number(e.target.value));
-	};
-	const heightChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setHeight(Number(e.target.value));
-	};
-
 	return (
 		<styled.Container>
 			<ImageSlider
@@ -94,8 +90,10 @@ function App() {
 				dotBorderColor={dotBorderColor}
 				dotHoverColor={dotHoverColor}
 				arrowColor={arrowColor}
+				autoSlider={autoSlider}
+				duration={duration}
+				borderRadius={borderRadius}
 			/>
-
 			<div style={{ width: "150px", textAlign: "center", marginTop: "10px" }}>
 				<Select
 					placeholder="objectFit"
@@ -204,15 +202,41 @@ function App() {
 				min={300}
 				max={700}
 				value={width}
-				onChange={widthChange}
+				onChange={(e) => setWidth(Number(e.target.value))}
 			/>
+			width : {width}px
 			<styled.RangeInput
 				type="range"
 				min={100}
 				max={500}
 				value={height}
-				onChange={heightChange}
+				onChange={(e) => setHeight(Number(e.target.value))}
 			/>
+			height : {height}px
+			<styled.RangeInput
+				type="range"
+				min={0}
+				max={100}
+				value={borderRadius}
+				onChange={(e) => setBorderRadius(Number(e.target.value))}
+			/>
+			border radius : {borderRadius}px
+			<styled.RangeInput
+				type="range"
+				min={0}
+				max={5000}
+				value={autoSlider}
+				onChange={(e) => setAutoSlider(Number(e.target.value))}
+			/>
+			auto slider : {autoSlider}ms
+			<styled.RangeInput
+				type="range"
+				min={300}
+				max={5000}
+				value={duration}
+				onChange={(e) => setDuration(Number(e.target.value))}
+			/>
+			animatuin duration : {duration}ms
 		</styled.Container>
 	);
 }
