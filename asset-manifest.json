@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/huipark-image-slider-demo/static/css/main.d822e31f.css",
-    "main.js": "/huipark-image-slider-demo/static/js/main.f37a9d4c.js",
+    "main.js": "/huipark-image-slider-demo/static/js/main.242725ce.js",
     "static/js/453.f036d7bd.chunk.js": "/huipark-image-slider-demo/static/js/453.f036d7bd.chunk.js",
     "index.html": "/huipark-image-slider-demo/index.html",
     "main.d822e31f.css.map": "/huipark-image-slider-demo/static/css/main.d822e31f.css.map",
-    "main.f37a9d4c.js.map": "/huipark-image-slider-demo/static/js/main.f37a9d4c.js.map",
+    "main.242725ce.js.map": "/huipark-image-slider-demo/static/js/main.242725ce.js.map",
     "453.f036d7bd.chunk.js.map": "/huipark-image-slider-demo/static/js/453.f036d7bd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d822e31f.css",
-    "static/js/main.f37a9d4c.js"
+    "static/js/main.242725ce.js"
   ]
 }
