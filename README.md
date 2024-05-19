@@ -1,5 +1,6 @@
-### [simple-image-carousel Demo WebSite](https://heeeete.github.io/huipark-image-slider-demo/)
-### [![image-slider](https://github.com/heeeete/simple-image-carousel/assets/101648575/b1bdd6a6-85a0-42f0-b25c-ddfa8ea4b007)](https://heeeete.github.io/huipark-image-slider-demo/)
+### [simple-image-carousel Demo WebSite](https://heeeete.github.io/simple-image-carousel/)
+
+### [![image-slider](https://github.com/heeeete/simple-image-carousel/assets/101648575/b1bdd6a6-85a0-42f0-b25c-ddfa8ea4b007)](https://heeeete.github.io/simple-image-carousel/)
 
 <br/>
 
@@ -29,9 +30,9 @@ npm i simple-image-carousel
 | width | 슬라이더의 너비를 설정합니다. | null | number \| null |
 | height | 슬라이더의 높이를 설정합니다. | null | number \| null |
 | objectFit | 이미지를 맞추는 방식을 설정합니다. | fill | "fill" \| "contain" \| "cover" \| "none" \| "scale-down" |
-| dotColor | 점의 색상을 설정합니다. | rgb(1,111,255) | string |
-| dotHoverColor | 점을 마우스로 가리킬 때의 색상을 설정합니다. | rgb(78,78,78) | string |
-| dotBorderColor | 점의 테두리 색상을 설정합니다. | rgb(78,78,78) | string |
+| dotColor | 점의 색상을 설정합니다. | RGB(0, 114, 255) | string |
+| dotHoverColor | 점을 마우스로 가리킬 때의 색상을 설정합니다. | rgb(135, 135, 135) | string |
+| dotBorderColor | 점의 테두리 색상을 설정합니다. | rgb(152, 152, 152) | string |
 | arrowColor | 화살표의 색상을 설정합니다. | white | string |
 | arrowSize | 화살표의 크기를 설정합니다. | 50 | number |
 | dotSize | 점의 크기를 설정합니다. | 13 | number |
@@ -92,9 +93,9 @@ The image slider supports lazy loading by default, loading images as they come i
 | width | Sets the width of the slider. | null | number \| null |
 | height | Sets the height of the slider. | null | number \| null |
 | objectFit | Sets the object fit mode for the images. | fill | "fill" \| "contain" \| "cover" \| "none" \| "scale-down" |
-| dotColor | Sets the color of the dots. | rgb(1,111,255) | string |
-| dotHoverColor | Sets the color of the dots when hovered over. | rgb(78,78,78) | string |
-| dotBorderColor | Sets the border color of the dots. | rgb(78,78,78) | string |
+| dotColor | Sets the color of the dots. | RGB(0, 114, 255) | string |
+| dotHoverColor | Sets the color of the dots when hovered over. | rgb(135, 135, 135) | string |
+| dotBorderColor | Sets the border color of the dots. | rgb(152, 152, 152) | string |
 | arrowColor | Sets the color of the arrows. | white | string |
 | arrowSize | Sets the size of the arrows. | 50 | number |
 | dotSize | Sets the size of the dots. | 13 | number |
