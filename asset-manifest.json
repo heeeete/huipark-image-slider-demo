@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/huipark-image-slider-demo/static/css/main.d822e31f.css",
-    "main.js": "/huipark-image-slider-demo/static/js/main.a4ec4592.js",
-    "static/js/453.3a4d1c69.chunk.js": "/huipark-image-slider-demo/static/js/453.3a4d1c69.chunk.js",
-    "index.html": "/huipark-image-slider-demo/index.html",
-    "main.d822e31f.css.map": "/huipark-image-slider-demo/static/css/main.d822e31f.css.map",
-    "main.a4ec4592.js.map": "/huipark-image-slider-demo/static/js/main.a4ec4592.js.map",
-    "453.3a4d1c69.chunk.js.map": "/huipark-image-slider-demo/static/js/453.3a4d1c69.chunk.js.map"
+    "main.css": "/simple-image-carousel/static/css/main.d822e31f.css",
+    "main.js": "/simple-image-carousel/static/js/main.347d5da9.js",
+    "static/js/453.3a4d1c69.chunk.js": "/simple-image-carousel/static/js/453.3a4d1c69.chunk.js",
+    "index.html": "/simple-image-carousel/index.html",
+    "main.d822e31f.css.map": "/simple-image-carousel/static/css/main.d822e31f.css.map",
+    "main.347d5da9.js.map": "/simple-image-carousel/static/js/main.347d5da9.js.map",
+    "453.3a4d1c69.chunk.js.map": "/simple-image-carousel/static/js/453.3a4d1c69.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d822e31f.css",
-    "static/js/main.a4ec4592.js"
+    "static/js/main.347d5da9.js"
   ]
 }
