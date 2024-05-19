@@ -1,6 +1,5 @@
-<<<<<<< Updated upstream
 [Demo](https://heeeete.github.io/huipark-image-slider-demo/)
-=======
+
 ### [Image Slider Demo WebSite](https://heeeete.github.io/huipark-image-slider-demo/)
 
 ### [![image-slider](https://github.com/heeeete/huipark-image-slider/assets/101648575/ecbb7994-4dd2-437e-a738-ea5eabb6c54e)](https://heeeete.github.io/huipark-image-slider-demo/)
@@ -131,4 +130,3 @@ const App = () => (
 
 export default App;
 ```
->>>>>>> Stashed changes
