@@ -57,15 +57,20 @@ const App = () => (
   <div>
     <ImageSlider
       images={images}
-      showArrows
-      showDots
-      enableDrag
-      enableLoop
+      showArrows={true}
+      showDots={true}
+      enableDrag={true}
+      enableLoop={true}
       width={600}
       height={400}
       objectFit="cover"
       dotColor="blue"
+      dotHoverColor="lightblue"
+      dotBorderColor="darkblue"
+      dotSize={20}
       arrowColor="black"
+      arrowSize={40}
+      borderRadius={10}
       autoSlider={3000}
       duration={500}
     />
@@ -119,17 +124,20 @@ const App = () => (
   <div>
     <ImageSlider
       images={images}
-      showArrows
-      showDots
-      enableDrag
-      enableLoop
+      showArrows={true}
+      showDots={true}
+      enableDrag={true}
+      enableLoop={true}
       width={600}
       height={400}
       objectFit="cover"
       dotColor="blue"
+      dotHoverColor="lightblue"
+      dotBorderColor="darkblue"
+      dotSize={20}
       arrowColor="black"
-      arrowSize={50}
-      dotSize={13}
+      arrowSize={40}
+      borderRadius={10}
       autoSlider={3000}
       duration={500}
     />
