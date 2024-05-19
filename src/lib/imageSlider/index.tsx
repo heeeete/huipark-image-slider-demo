@@ -42,9 +42,8 @@ const ImageSlider = ({
 	autoSlider = 0,
 	duration = 300,
 }: ImageSliderProps) => {
-	if (duration < 300) {
-		throw new Error("Duration should be at least 300ms");
-	}
+	if (duration < 300) throw new Error("Duration should be at least 300ms");
+	if (autoSlider > 0) enableLoop = true;
 
 	const imgStyle: React.CSSProperties = {
 		width: width ? `${width}px` : "100%",

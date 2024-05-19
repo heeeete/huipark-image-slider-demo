@@ -17,7 +17,6 @@ export const ColorContainer = styled.div`
 	display: flex;
 	position: relative;
 	align-items: center;
-
 	margin: 10px 0;
 `;
 
@@ -45,6 +44,15 @@ export const HexColorContainer = styled.div`
 	z-index: 10;
 `;
 
-export const RangeInput = styled.input`
+export const RangeContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 70%;
+	margin: 5px 0;
+`;
+
+export const RangeInput = styled.input`
+	width: 100%;
+	max-width: 500px;
 `;

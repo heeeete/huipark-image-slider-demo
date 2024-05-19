@@ -130,8 +130,9 @@ function App() {
 				enableLoop
 				<input
 					type="checkbox"
-					checked={enableLoop}
+					checked={enableLoop || autoSlider ? true : false}
 					onChange={() => setEnableLoop((curr) => !curr)}
+					disabled={autoSlider ? true : false}
 				/>
 			</styled.columnDiv>
 			<div
@@ -197,46 +198,56 @@ function App() {
 					)}
 				</styled.ColorContainer>
 			</div>
-			<styled.RangeInput
-				type="range"
-				min={300}
-				max={700}
-				value={width}
-				onChange={(e) => setWidth(Number(e.target.value))}
-			/>
-			width : {width}px
-			<styled.RangeInput
-				type="range"
-				min={100}
-				max={500}
-				value={height}
-				onChange={(e) => setHeight(Number(e.target.value))}
-			/>
-			height : {height}px
-			<styled.RangeInput
-				type="range"
-				min={0}
-				max={100}
-				value={borderRadius}
-				onChange={(e) => setBorderRadius(Number(e.target.value))}
-			/>
-			border radius : {borderRadius}px
-			<styled.RangeInput
-				type="range"
-				min={0}
-				max={5000}
-				value={autoSlider}
-				onChange={(e) => setAutoSlider(Number(e.target.value))}
-			/>
-			auto slider : {autoSlider}ms
-			<styled.RangeInput
-				type="range"
-				min={300}
-				max={5000}
-				value={duration}
-				onChange={(e) => setDuration(Number(e.target.value))}
-			/>
-			animatuin duration : {duration}ms
+			<styled.RangeContainer>
+				width : {width}px
+				<styled.RangeInput
+					type="range"
+					min={300}
+					max={700}
+					value={width}
+					onChange={(e) => setWidth(Number(e.target.value))}
+				/>
+			</styled.RangeContainer>
+			<styled.RangeContainer>
+				height : {height}px
+				<styled.RangeInput
+					type="range"
+					min={100}
+					max={500}
+					value={height}
+					onChange={(e) => setHeight(Number(e.target.value))}
+				/>
+			</styled.RangeContainer>
+			<styled.RangeContainer>
+				border radius : {borderRadius}px
+				<styled.RangeInput
+					type="range"
+					min={0}
+					max={100}
+					value={borderRadius}
+					onChange={(e) => setBorderRadius(Number(e.target.value))}
+				/>
+			</styled.RangeContainer>
+			<styled.RangeContainer>
+				auto slider : {autoSlider}ms
+				<styled.RangeInput
+					type="range"
+					min={0}
+					max={5000}
+					value={autoSlider}
+					onChange={(e) => setAutoSlider(Number(e.target.value))}
+				/>
+			</styled.RangeContainer>
+			<styled.RangeContainer>
+				animatuin duration : {duration}ms
+				<styled.RangeInput
+					type="range"
+					min={300}
+					max={5000}
+					value={duration}
+					onChange={(e) => setDuration(Number(e.target.value))}
+				/>
+			</styled.RangeContainer>
 		</styled.Container>
 	);
 }
