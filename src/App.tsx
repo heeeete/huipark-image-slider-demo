@@ -1,5 +1,5 @@
-import * as styled from "./styledApp.tsx";
-import ImageSlider from "./lib/index.tsx";
+import * as styled from "./styledApp";
+import ImageSlider from "./lib/index";
 import React, { useRef, useState, useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
 import Select from "react-select";
@@ -12,8 +12,8 @@ const images = [
 ];
 
 interface ObjectFitProps {
-	value: string;
-	label: string;
+	value: "fill" | "cover" | "contain" | "none" | "scale-down";
+	label: "fill" | "cover" | "contain" | "none" | "scale-down";
 }
 
 const objectFitOpt: ObjectFitProps[] = [
@@ -27,7 +27,10 @@ const objectFitOpt: ObjectFitProps[] = [
 function App() {
 	const [showArrow, setShowArrow] = useState<boolean>(true);
 	const [showDots, setShowDots] = useState<boolean>(true);
-	const [objectFit, setObjectFit] = useState<any>("fill");
+	const [objectFit, setObjectFit] = useState<ObjectFitProps>({
+		value: "fill",
+		label: "fill",
+	});
 	const [enableDrag, setEnableDrag] = useState<boolean>(true);
 	const [enableLoop, setEnableLoop] = useState<boolean>(true);
 	const [dotColor, setDotColor] = useState<string>("rgb(1,111,255)");
@@ -99,7 +102,7 @@ function App() {
 				<Select
 					placeholder="objectFit"
 					value={objectFit}
-					onChange={setObjectFit}
+					onChange={(value) => setObjectFit(value as ObjectFitProps)}
 					options={objectFitOpt}
 				/>
 			</div>
@@ -240,7 +243,7 @@ function App() {
 				/>
 			</styled.RangeContainer>
 			<styled.RangeContainer>
-				animatuin duration : {duration}ms
+				animation duration : {duration}ms
 				<styled.RangeInput
 					type="range"
 					min={300}
