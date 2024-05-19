@@ -12,8 +12,8 @@ npm i simple-image-carousel
 
 # Language
 
-- [Korea](#Korea)
-- [English](#English)
+- # [🇰🇷](#🇰🇷)
+- # [🇺🇸](#🇺🇸)
 
 <br/>
 
