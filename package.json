@@ -1,21 +1,24 @@
 {
-	"name": "@huipark/image-slider",
-	"version": "0.0.1",
+	"name": "simple-image-carousel",
+	"version": "1.0.1",
 	"private": false,
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"browser": "./browser/specific/main.js",
-	"description": "Flexible image slider",
-	"homepage": "https://heeeete.github.io/huipark-image-slider-demo/",
+	"description": "customizable image slider component for React with built-in lazy loading.",
 	"keywords": [
 		"react",
-		"nextjs",
-		"image",
-		"slider",
 		"image-slider",
-		"image slider",
-		"lazy loading"
+		"carousel",
+		"slider",
+		"image",
+		"lazy loading",
+		"customizable",
+		"responsive",
+		"react-component",
+		"typescript"
 	],
+	"homepage": "https://heeeete.github.io/huipark-image-slider-demo/",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/heeeete/huipark-image-slider"
