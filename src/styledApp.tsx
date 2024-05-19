@@ -46,5 +46,5 @@ export const HexColorContainer = styled.div`
 `;
 
 export const RangeInput = styled.input`
-	width: 600px;
+	width: 70%;
 `;

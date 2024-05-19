@@ -85,14 +85,21 @@ const ImageSlider = ({
 	}, [transitionEnabled]);
 
 	useEffect(() => {
-		const resizeObserver = new ResizeObserver((entries) => {
-			for (let e of entries) {
-				const { width } = e.contentRect;
-				setImgWidth(width);
-				setOffset(-idx * width);
-				setIdx(enableLoop ? 1 : 0);
-			}
-		});
+		let id: number;
+
+		const handleResize = (entries: any) => {
+			clearTimeout(id);
+			id = window.setTimeout(() => {
+				for (let e of entries) {
+					const { width } = e.contentRect;
+					setImgWidth(width);
+					setOffset(-idx * width);
+					setIdx(enableLoop ? 1 : 0);
+				}
+			}, 300);
+		};
+
+		const resizeObserver = new ResizeObserver(handleResize);
 
 		if (sliderContainerRef.current)
 			resizeObserver.observe(sliderContainerRef.current);

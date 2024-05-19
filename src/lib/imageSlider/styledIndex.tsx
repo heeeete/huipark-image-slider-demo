@@ -5,12 +5,17 @@ interface ContainerProps {
 	$height?: number | null;
 }
 
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div.attrs<ContainerProps>(
+	({ $width, $height }) => ({
+		style: {
+			width: $width ? `${$width + 20}px` : "100%",
+			height: $height ? `${$height}px` : "auto",
+		},
+	})
+)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: ${(props) => (props.$width ? `${props.$width + 20}px` : "100%")};
-	${(props) => props.$height && `height: ${props.$height}px`};
 `;
 
 export const SliderContainer = styled.div`
@@ -25,12 +30,17 @@ interface SliderImgContainerProps {
 	$borderRadius?: number;
 }
 
-export const SliderImgContainer = styled.div<SliderImgContainerProps>`
+export const SliderImgContainer = styled.div.attrs<SliderImgContainerProps>(
+	({ $width, $height, $borderRadius }) => ({
+		style: {
+			width: $width ? `${$width}px` : "100%",
+			height: $height ? `${$height}px` : "100%",
+			borderRadius: `${$borderRadius}px`,
+		},
+	})
+)`
 	display: flex;
 	overflow: hidden;
-	width: ${(props) => (props.$width ? `${props.$width}px` : "100%")};
-	height: ${(props) => (props.$height ? `${props.$height}px` : "100%")};
-	border-radius: ${(props) => props.$borderRadius}px;
 `;
 
 interface ImgInnerContainerProps {

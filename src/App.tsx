@@ -1,8 +1,8 @@
 import * as styled from "./styledApp.tsx";
 import ImageSlider from "./lib/index.tsx";
-import React, { useRef, useState, useEffect, ChangeEvent } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
-import Select, { StylesConfig } from "react-select";
+import Select from "react-select";
 
 const images = [
 	{ url: "https://heeeete.github.io/huipark-image-slider-demo/1.jpg" },
