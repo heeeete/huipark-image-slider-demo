@@ -64,25 +64,30 @@ interface IndicatorProps {
 	$dotColor: string;
 	$dotHoverColor: string;
 	$dotBorderColor: string;
+	$hoverFlag: boolean;
+	$dotSize: number;
 }
 
 export const Indicator = styled.div<IndicatorProps>`
-	width: 13px;
-	height: 13px;
+	width: ${(props) => props.$dotSize}px;
+	height: ${(props) => props.$dotSize}px;
 	border: 1px solid ${(props) => props.$dotBorderColor};
 	background-color: ${(props) => props.$dotColor};
 	border-radius: 50%;
 	margin-inline: 2px;
 	transition: 0.3s;
+	transform: translateY(calc(${(props) => props.$dotSize}px / -1));
+
 	cursor: pointer;
 
 	&:hover {
-		background-color: ${(props) => props.$dotHoverColor};
+		${(props) =>
+			props.$hoverFlag && `background-color:  ${props.$dotHoverColor}`};
 	}
 `;
 
 export const IndicatorContainer = styled.div`
-	transform: translateY(-20px);
+	transform: translateY(-5px);
 	display: flex;
 `;
 

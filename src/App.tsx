@@ -5,10 +5,10 @@ import { HexColorPicker } from "react-colorful";
 import Select from "react-select";
 
 const images = [
-	{ url: "https://heeeete.github.io/huipark-image-slider-demo/1.jpg" },
-	{ url: "https://heeeete.github.io/huipark-image-slider-demo/2.jpeg" },
-	{ url: "https://heeeete.github.io/huipark-image-slider-demo/3.jpg" },
-	{ url: "https://heeeete.github.io/huipark-image-slider-demo/5.png" },
+	{ url: "https://heeeete.github.io/simple-image-carousel/1.jpg" },
+	{ url: "https://heeeete.github.io/simple-image-carousel/2.jpeg" },
+	{ url: "https://heeeete.github.io/simple-image-carousel/3.jpg" },
+	{ url: "https://heeeete.github.io/simple-image-carousel/5.png" },
 ];
 
 interface ObjectFitProps {
@@ -33,9 +33,11 @@ function App() {
 	});
 	const [enableDrag, setEnableDrag] = useState<boolean>(true);
 	const [enableLoop, setEnableLoop] = useState<boolean>(true);
-	const [dotColor, setDotColor] = useState<string>("rgb(1,111,255)");
-	const [dotBorderColor, setDotBorderColor] = useState<string>("rgb(78,78,78)");
-	const [dotHoverColor, setDotHoverColor] = useState<string>("rgb(78,78,78)");
+	const [dotColor, setDotColor] = useState<string>("RGB(0, 114, 255)");
+	const [dotBorderColor, setDotBorderColor] =
+		useState<string>("rgb(152, 152, 152)");
+	const [dotHoverColor, setDotHoverColor] =
+		useState<string>("rgb(135, 135, 135)");
 	const [arrowColor, setArrowColor] = useState<string>("white");
 	const [isDotColor, setIsDotColor] = useState<boolean>(false);
 	const [isDotBorderColor, setIsDotBorderColor] = useState<boolean>(false);
@@ -46,6 +48,8 @@ function App() {
 	const [borderRadius, setBorderRadius] = useState<number>(0);
 	const [autoSlider, setAutoSlider] = useState<number>(0);
 	const [duration, setDuration] = useState<number>(300);
+	const [arrowSize, setArrowSize] = useState<number>(50);
+	const [dotSize, setDotSize] = useState<number>(13);
 	const colorPickersRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -80,7 +84,7 @@ function App() {
 
 	return (
 		<styled.Container>
-			<styled.Header>simple-image-slider</styled.Header>
+			<styled.Header>simple-image-carousel</styled.Header>
 			<ImageSlider
 				images={images}
 				width={width}
@@ -97,6 +101,8 @@ function App() {
 				autoSlider={autoSlider}
 				duration={duration}
 				borderRadius={borderRadius}
+				arrowSize={arrowSize}
+				dotSize={dotSize}
 			/>
 			<div style={{ width: "150px", textAlign: "center", marginTop: "10px" }}>
 				<Select
@@ -220,6 +226,26 @@ function App() {
 					max={500}
 					value={height}
 					onChange={(e) => setHeight(Number(e.target.value))}
+				/>
+			</styled.RangeContainer>
+			<styled.RangeContainer>
+				arrowSize : {arrowSize}px
+				<styled.RangeInput
+					type="range"
+					min={1}
+					max={200}
+					value={arrowSize}
+					onChange={(e) => setArrowSize(Number(e.target.value))}
+				/>
+			</styled.RangeContainer>
+			<styled.RangeContainer>
+				dotSize : {dotSize}px
+				<styled.RangeInput
+					type="range"
+					min={1}
+					max={100}
+					value={dotSize}
+					onChange={(e) => setDotSize(Number(e.target.value))}
 				/>
 			</styled.RangeContainer>
 			<styled.RangeContainer>

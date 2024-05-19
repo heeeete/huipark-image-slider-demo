@@ -17,11 +17,12 @@ interface ImageSliderProps {
 	dotColor?: string;
 	dotHoverColor?: string;
 	dotBorderColor?: string;
-	arrowColor?: string;
-	arrowSize?: number;
+	dotSize?: number;
 	borderRadius?: number;
 	autoSlider?: number;
 	duration?: number;
+	arrowColor?: string;
+	arrowSize?: number;
 }
 
 const ImageSlider = ({
@@ -33,11 +34,12 @@ const ImageSlider = ({
 	width = null,
 	height = null,
 	objectFit = "fill",
-	dotColor = "rgb(1,111,255)",
-	dotHoverColor = "rgb(78,78,78)",
-	dotBorderColor = "rgb(78,78,78)",
+	dotColor = "RGB(0, 114, 255)",
+	dotHoverColor = "rgb(135, 135, 135)",
+	dotBorderColor = "rgb(152, 152, 152)",
 	arrowColor = "white",
 	arrowSize = 50,
+	dotSize = 13,
 	borderRadius = 0,
 	autoSlider = 0,
 	duration = 300,
@@ -211,15 +213,19 @@ const ImageSlider = ({
 			{ length: enableLoop ? totalChildren - 2 : totalChildren },
 			(_, _idx) => {
 				let indicatorIdx = enableLoop ? _idx + 1 : _idx;
+				let hoverFlag = true;
 				let backgroundColor: string;
 
 				if (enableLoop) {
 					if (idx === totalChildren - 1 && indicatorIdx === 1) {
 						backgroundColor = dotColor;
+						hoverFlag = false;
 					} else if (idx === 0 && indicatorIdx === totalChildren - 2) {
 						backgroundColor = dotColor;
+						hoverFlag = false;
 					} else if (indicatorIdx === idx) {
 						backgroundColor = dotColor;
+						hoverFlag = false;
 					} else {
 						backgroundColor = "";
 					}
@@ -233,6 +239,8 @@ const ImageSlider = ({
 						$dotColor={backgroundColor}
 						$dotHoverColor={dotHoverColor}
 						$dotBorderColor={dotBorderColor}
+						$hoverFlag={hoverFlag}
+						$dotSize={dotSize}
 						onClick={() => onClickIndicator(_idx + 1)}
 						key={_idx}
 					/>
