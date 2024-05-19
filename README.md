@@ -10,11 +10,6 @@
 npm i simple-image-carousel
 ```
 
-# Language
-
-- # [🇰🇷](#🇰🇷)
-- # [🇺🇸](#.)
-
 <br/>
 
 # 🇰🇷
@@ -81,8 +76,6 @@ export default App;
 ```
 
 # 🇺🇸
-## .
-
 The image slider supports lazy loading by default, loading images as they come into view during scrolling.
 | **Props** | **Description** | **Default** | **Type** |
 |---------------------|----------------------------------------------------------------------------|--------------------|---------------------|
