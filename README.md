@@ -1,5 +1,5 @@
-### [Image Slider Demo WebSite](https://heeeete.github.io/huipark-image-slider-demo/)
-### [![image-slider](https://github.com/heeeete/huipark-image-slider/assets/101648575/ecbb7994-4dd2-437e-a738-ea5eabb6c54e)](https://heeeete.github.io/huipark-image-slider-demo/)
+### [simple-image-carousel Demo WebSite](https://heeeete.github.io/huipark-image-slider-demo/)
+### [![image-slider](https://github.com/heeeete/simple-image-carousel/assets/101648575/b1bdd6a6-85a0-42f0-b25c-ddfa8ea4b007)](https://heeeete.github.io/huipark-image-slider-demo/)
 
 <br/>
 
@@ -34,6 +34,7 @@ npm i simple-image-carousel
 | dotBorderColor | 점의 테두리 색상을 설정합니다. | rgb(78,78,78) | string |
 | arrowColor | 화살표의 색상을 설정합니다. | white | string |
 | arrowSize | 화살표의 크기를 설정합니다. | 50 | number |
+| dotSize | 점의 크기를 설정합니다. | 13 | number |
 | borderRadius | 슬라이더의 모서리 반경을 설정합니다. | 0 | number |
 | autoSlider | 자동 슬라이드 시간(밀리초)을 설정합니다. | 0 | number |
 | duration | 슬라이드 애니메이션 지속 시간(밀리초)을 설정합니다. | 300 | number |
@@ -51,6 +52,12 @@ const images = [
 ];
 
 const App = () => (
+{/* 넓이를 지정해 주지 않으면 기본적으로 부모 크기의 100%를 차지합니다 */}
+   <div>
+    <ImageSlider images={images} />
+  </div>
+
+{/* 아래와 같은 props를 사용할 수 있습니다. */}
   <div>
     <ImageSlider
       images={images}
@@ -90,6 +97,7 @@ The image slider supports lazy loading by default, loading images as they come i
 | dotBorderColor | Sets the border color of the dots. | rgb(78,78,78) | string |
 | arrowColor | Sets the color of the arrows. | white | string |
 | arrowSize | Sets the size of the arrows. | 50 | number |
+| dotSize | Sets the size of the dots. | 13 | number |
 | borderRadius | Sets the border radius of the slider. | 0 | number |
 | autoSlider | Sets the automatic slider interval time in milliseconds. | 0 | number |
 | duration | Sets the duration of the slide animation in milliseconds. | 300 | number |
@@ -107,6 +115,12 @@ const images = [
 ];
 
 const App = () => (
+{/* If you don't specify a width, it defaults to 100% of the parent's size */}
+   <div>
+    <ImageSlider images={images} />
+  </div>
+
+{/* You can use the following props */}
   <div>
     <ImageSlider
       images={images}
@@ -119,6 +133,8 @@ const App = () => (
       objectFit="cover"
       dotColor="blue"
       arrowColor="black"
+      arrowSize={50}
+      dotSize={13}
       autoSlider={3000}
       duration={500}
     />
