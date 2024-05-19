@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+export const Header = styled.h2``;
+
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;

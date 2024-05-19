@@ -77,6 +77,7 @@ function App() {
 
 	return (
 		<styled.Container>
+			<styled.Header>huipark@image-slider</styled.Header>
 			<ImageSlider
 				images={images}
 				width={width}
