@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import * as Styled from "./styledIndex";
+import * as Styled from "./indexStyled";
 
 interface Image {
 	url: string;
@@ -44,7 +44,7 @@ const ImageSlider = ({
 	autoSlider = 0,
 	duration = 300,
 }: ImageSliderProps) => {
-	if (duration < 300) throw new Error("Duration should be at least 300ms");
+	if (duration < 100) throw new Error("Duration should be at least 100ms");
 	if (autoSlider > 0) enableLoop = true;
 
 	const imgStyle: React.CSSProperties = {
