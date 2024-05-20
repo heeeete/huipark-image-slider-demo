@@ -11,12 +11,14 @@ npm i simple-image-carousel
 
 <br/>
 
-[Korea](#🇰🇷)
+# Languages
+**🇰🇷 [Korea](#Korea)**
 
+**🇺🇸 [English](#English)**
 
-### Korea
+<br/>
 
-
+# Korea
 이미지 슬라이더는 기본적으로 lazy loading을 지원하여, 스크롤 시점에 이미지를 로드합니다.
 | **Props** | **설명** | **기본값** | **타입** |
 |---------------------|----------------------------------------------------------------------------|--------------------|---------------------|
@@ -83,7 +85,7 @@ const App = () => (
 export default App;
 ```
 
-# 🇺🇸
+# English
 The image slider supports lazy loading by default, loading images as they come into view during scrolling.
 | **Props** | **Description** | **Default** | **Type** |
 |---------------------|----------------------------------------------------------------------------|--------------------|---------------------|
@@ -149,5 +151,3 @@ const App = () => (
 
 export default App;
 ```
-
-# 🇰🇷
