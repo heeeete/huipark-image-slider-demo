@@ -13,11 +13,12 @@ interface ImageSliderProps {
     dotColor?: string;
     dotHoverColor?: string;
     dotBorderColor?: string;
-    arrowColor?: string;
-    arrowSize?: number;
+    dotSize?: number;
     borderRadius?: number;
     autoSlider?: number;
     duration?: number;
+    arrowColor?: string;
+    arrowSize?: number;
 }
-declare const ImageSlider: ({ images, showArrows, showDots, enableDrag, enableLoop, width, height, objectFit, dotColor, dotHoverColor, dotBorderColor, arrowColor, arrowSize, borderRadius, autoSlider, duration, }: ImageSliderProps) => import("react/jsx-runtime").JSX.Element;
+declare const ImageSlider: ({ images, showArrows, showDots, enableDrag, enableLoop, width, height, objectFit, dotColor, dotHoverColor, dotBorderColor, arrowColor, arrowSize, dotSize, borderRadius, autoSlider, duration, }: ImageSliderProps) => import("react/jsx-runtime").JSX.Element;
 export default ImageSlider;

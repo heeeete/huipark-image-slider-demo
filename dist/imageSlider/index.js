@@ -22,7 +22,7 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-run
 import { useState, useEffect, useRef } from "react";
 import * as Styled from "./styledIndex";
 var ImageSlider = function (_a) {
-    var images = _a.images, _b = _a.showArrows, showArrows = _b === void 0 ? true : _b, _c = _a.showDots, showDots = _c === void 0 ? true : _c, _d = _a.enableDrag, enableDrag = _d === void 0 ? true : _d, _e = _a.enableLoop, enableLoop = _e === void 0 ? true : _e, _f = _a.width, width = _f === void 0 ? null : _f, _g = _a.height, height = _g === void 0 ? null : _g, _h = _a.objectFit, objectFit = _h === void 0 ? "fill" : _h, _j = _a.dotColor, dotColor = _j === void 0 ? "rgb(1,111,255)" : _j, _k = _a.dotHoverColor, dotHoverColor = _k === void 0 ? "rgb(78,78,78)" : _k, _l = _a.dotBorderColor, dotBorderColor = _l === void 0 ? "rgb(78,78,78)" : _l, _m = _a.arrowColor, arrowColor = _m === void 0 ? "white" : _m, _o = _a.arrowSize, arrowSize = _o === void 0 ? 50 : _o, _p = _a.borderRadius, borderRadius = _p === void 0 ? 0 : _p, _q = _a.autoSlider, autoSlider = _q === void 0 ? 0 : _q, _r = _a.duration, duration = _r === void 0 ? 300 : _r;
+    var images = _a.images, _b = _a.showArrows, showArrows = _b === void 0 ? true : _b, _c = _a.showDots, showDots = _c === void 0 ? true : _c, _d = _a.enableDrag, enableDrag = _d === void 0 ? true : _d, _e = _a.enableLoop, enableLoop = _e === void 0 ? true : _e, _f = _a.width, width = _f === void 0 ? null : _f, _g = _a.height, height = _g === void 0 ? null : _g, _h = _a.objectFit, objectFit = _h === void 0 ? "fill" : _h, _j = _a.dotColor, dotColor = _j === void 0 ? "RGB(0, 114, 255)" : _j, _k = _a.dotHoverColor, dotHoverColor = _k === void 0 ? "rgb(135, 135, 135)" : _k, _l = _a.dotBorderColor, dotBorderColor = _l === void 0 ? "rgb(152, 152, 152)" : _l, _m = _a.arrowColor, arrowColor = _m === void 0 ? "white" : _m, _o = _a.arrowSize, arrowSize = _o === void 0 ? 50 : _o, _p = _a.dotSize, dotSize = _p === void 0 ? 13 : _p, _q = _a.borderRadius, borderRadius = _q === void 0 ? 0 : _q, _r = _a.autoSlider, autoSlider = _r === void 0 ? 0 : _r, _s = _a.duration, duration = _s === void 0 ? 300 : _s;
     if (duration < 300)
         throw new Error("Duration should be at least 300ms");
     if (autoSlider > 0)
@@ -36,10 +36,10 @@ var ImageSlider = function (_a) {
     var sliderContainerRef = useRef(null);
     var loopedImages = enableLoop
         ? __spreadArray(__spreadArray([images[images.length - 1]], images, true), [images[0]], false) : images;
-    var _s = useState(0), imgWidth = _s[0], setImgWidth = _s[1];
-    var _t = useState(0), offset = _t[0], setOffset = _t[1];
-    var _u = useState(enableLoop ? 1 : 0), idx = _u[0], setIdx = _u[1];
-    var _v = useState(true), transitionEnabled = _v[0], setTransitionEnabled = _v[1];
+    var _t = useState(0), imgWidth = _t[0], setImgWidth = _t[1];
+    var _u = useState(0), offset = _u[0], setOffset = _u[1];
+    var _v = useState(enableLoop ? 1 : 0), idx = _v[0], setIdx = _v[1];
+    var _w = useState(true), transitionEnabled = _w[0], setTransitionEnabled = _w[1];
     var totalChildren = loopedImages.length;
     var isMoving = useRef(false);
     var initDragPos = 0;
@@ -173,16 +173,20 @@ var ImageSlider = function (_a) {
     var RenderIndicators = function () {
         var indicators = Array.from({ length: enableLoop ? totalChildren - 2 : totalChildren }, function (_, _idx) {
             var indicatorIdx = enableLoop ? _idx + 1 : _idx;
+            var hoverFlag = true;
             var backgroundColor;
             if (enableLoop) {
                 if (idx === totalChildren - 1 && indicatorIdx === 1) {
                     backgroundColor = dotColor;
+                    hoverFlag = false;
                 }
                 else if (idx === 0 && indicatorIdx === totalChildren - 2) {
                     backgroundColor = dotColor;
+                    hoverFlag = false;
                 }
                 else if (indicatorIdx === idx) {
                     backgroundColor = dotColor;
+                    hoverFlag = false;
                 }
                 else {
                     backgroundColor = "";
@@ -194,7 +198,7 @@ var ImageSlider = function (_a) {
                 else
                     backgroundColor = "";
             }
-            return (_jsx(Styled.Indicator, { "$dotColor": backgroundColor, "$dotHoverColor": dotHoverColor, "$dotBorderColor": dotBorderColor, onClick: function () { return onClickIndicator(_idx + 1); } }, _idx));
+            return (_jsx(Styled.Indicator, { "$dotColor": backgroundColor, "$dotHoverColor": dotHoverColor, "$dotBorderColor": dotBorderColor, "$hoverFlag": hoverFlag, "$dotSize": dotSize, onClick: function () { return onClickIndicator(_idx + 1); } }, _idx));
         });
         return _jsx(_Fragment, { children: indicators });
     };

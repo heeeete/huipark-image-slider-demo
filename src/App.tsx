@@ -1,4 +1,4 @@
-import * as styled from "./styledApp";
+import * as styled from "./appStyled";
 import ImageSlider from "./lib/index";
 import React, { useRef, useState, useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
@@ -272,7 +272,7 @@ function App() {
 				animation duration : {duration}ms
 				<styled.RangeInput
 					type="range"
-					min={300}
+					min={100}
 					max={5000}
 					value={duration}
 					onChange={(e) => setDuration(Number(e.target.value))}

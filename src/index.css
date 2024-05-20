@@ -8,17 +8,3 @@ input[type="checkbox"] {
 	width: 20px;
 	height: 20px;
 }
-
-/* input[type="range"] {
-	-webkit-appearance: none;
-	background-color: skyblue;
-	border-radius: 30px;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	width: 20px;
-	height: 20px;
-	background-color: white;
-	border-radius: 50%;
-} */
