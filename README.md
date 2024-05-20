@@ -5,14 +5,16 @@
 <br/>
 
 ## Install
-
 ```
 npm i simple-image-carousel
 ```
 
 <br/>
 
+[Korea](#Korea)
+
 # 🇰🇷
+
 
 이미지 슬라이더는 기본적으로 lazy loading을 지원하여, 스크롤 시점에 이미지를 로드합니다.
 | **Props** | **설명** | **기본값** | **타입** |
@@ -146,3 +148,4 @@ const App = () => (
 
 export default App;
 ```
+# Korea
