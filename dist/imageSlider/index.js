@@ -20,11 +20,11 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from "react";
-import * as Styled from "./styledIndex";
+import * as Styled from "./indexStyled";
 var ImageSlider = function (_a) {
     var images = _a.images, _b = _a.showArrows, showArrows = _b === void 0 ? true : _b, _c = _a.showDots, showDots = _c === void 0 ? true : _c, _d = _a.enableDrag, enableDrag = _d === void 0 ? true : _d, _e = _a.enableLoop, enableLoop = _e === void 0 ? true : _e, _f = _a.width, width = _f === void 0 ? null : _f, _g = _a.height, height = _g === void 0 ? null : _g, _h = _a.objectFit, objectFit = _h === void 0 ? "fill" : _h, _j = _a.dotColor, dotColor = _j === void 0 ? "RGB(0, 114, 255)" : _j, _k = _a.dotHoverColor, dotHoverColor = _k === void 0 ? "rgb(135, 135, 135)" : _k, _l = _a.dotBorderColor, dotBorderColor = _l === void 0 ? "rgb(152, 152, 152)" : _l, _m = _a.arrowColor, arrowColor = _m === void 0 ? "white" : _m, _o = _a.arrowSize, arrowSize = _o === void 0 ? 50 : _o, _p = _a.dotSize, dotSize = _p === void 0 ? 13 : _p, _q = _a.borderRadius, borderRadius = _q === void 0 ? 0 : _q, _r = _a.autoSlider, autoSlider = _r === void 0 ? 0 : _r, _s = _a.duration, duration = _s === void 0 ? 300 : _s;
-    if (duration < 300)
-        throw new Error("Duration should be at least 300ms");
+    if (duration < 100)
+        throw new Error("Duration should be at least 100ms");
     if (autoSlider > 0)
         enableLoop = true;
     var imgStyle = {
