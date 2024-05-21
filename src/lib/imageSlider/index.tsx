@@ -58,11 +58,12 @@ const ImageSlider = ({
 		? [images[images.length - 1], ...images, images[0]]
 		: images;
 	const [imgWidth, setImgWidth] = useState<number>(0);
-	const [offset, setOffset] = useState<number>(0);
+	const [offset, setOffset] = useState<number>(enableLoop ? 1 : 0);
 	const [idx, setIdx] = useState<number>(enableLoop ? 1 : 0);
 	const [transitionEnabled, setTransitionEnabled] = useState(true);
 	const totalChildren: number = loopedImages.length;
 	const isMoving = useRef<boolean>(false);
+	const initialRender = useRef<boolean>(true); // 초기 렌더링 여부를 추적
 	let initDragPos: number = 0;
 	let travelRatio: number = 0;
 	let travel: number = 0;
@@ -83,7 +84,7 @@ const ImageSlider = ({
 				setTransitionEnabled(true);
 			});
 		}
-	}, [transitionEnabled]);
+	}, [transitionEnabled, imgWidth]);
 
 	useEffect(() => {
 		let id: number;
@@ -94,8 +95,6 @@ const ImageSlider = ({
 				for (let e of entries) {
 					const { width } = e.contentRect;
 					setImgWidth(width);
-					setOffset(-idx * width);
-					setIdx(enableLoop ? 1 : 0);
 				}
 			}, 300);
 		};
@@ -110,6 +109,23 @@ const ImageSlider = ({
 				resizeObserver.unobserve(sliderContainerRef.current);
 		};
 	}, []);
+
+	useEffect(() => {
+		if (sliderContainerRef.current) {
+			const width = sliderContainerRef.current.offsetWidth;
+
+			setImgWidth(width);
+
+			if (initialRender.current && enableLoop) {
+				setTransitionEnabled(false);
+				setOffset(-width);
+				initialRender.current = false;
+			} else {
+				setOffset(enableLoop ? -width : 0);
+			}
+			setIdx(enableLoop ? 1 : 0);
+		}
+	}, [imgWidth]);
 
 	useEffect(() => {
 		if (!enableDrag) return;
