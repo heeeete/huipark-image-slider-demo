@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import * as Styled from "./indexStyled";
 
 interface Image {
@@ -60,31 +60,49 @@ const ImageSlider = ({
 	const [imgWidth, setImgWidth] = useState<number>(0);
 	const [offset, setOffset] = useState<number>(enableLoop ? 1 : 0);
 	const [idx, setIdx] = useState<number>(enableLoop ? 1 : 0);
-	const [transitionEnabled, setTransitionEnabled] = useState(true);
+	const transitionEnabled = useRef<boolean>(false);
 	const totalChildren: number = loopedImages.length;
 	const isMoving = useRef<boolean>(false);
-	const initialRender = useRef<boolean>(true); // 초기 렌더링 여부를 추적
 	let initDragPos: number = 0;
 	let travelRatio: number = 0;
 	let travel: number = 0;
 	let originOffset: number = 0;
 
+	useLayoutEffect(() => {
+		function initImagePosition() {
+			if (enableLoop) {
+				const a: number | undefined = sliderContainerRef.current?.offsetWidth;
+				setOffset(-1 * (a ? a : 0));
+			}
+		}
+		initImagePosition();
+	}, []);
+
 	useEffect(() => {
-		if (autoSlider) {
+		if (imgWidth) {
+			setIdx(enableLoop ? 1 : 0);
+			setOffset(enableLoop ? -imgWidth : 0);
+		}
+	}, [enableLoop]);
+
+	useEffect(() => {
+		if (!transitionEnabled.current) {
+			requestAnimationFrame(() => {
+				transitionEnabled.current = true;
+			});
+		}
+	}, [transitionEnabled.current]);
+
+	useEffect(() => {
+		if (autoSlider > 0) {
 			const intervalId = setInterval(() => {
 				navigate(1);
 			}, autoSlider);
-			return () => clearInterval(intervalId);
+			return () => {
+				clearInterval(intervalId);
+			};
 		}
-	}, [autoSlider, imgWidth, idx]);
-
-	useEffect(() => {
-		if (!transitionEnabled) {
-			requestAnimationFrame(() => {
-				setTransitionEnabled(true);
-			});
-		}
-	}, [transitionEnabled, imgWidth]);
+	}, [autoSlider, idx]);
 
 	useEffect(() => {
 		let id: number;
@@ -95,37 +113,22 @@ const ImageSlider = ({
 				for (let e of entries) {
 					const { width } = e.contentRect;
 					setImgWidth(width);
+					setIdx(enableLoop ? 1 : 0);
+					setOffset(enableLoop ? -width : 0);
 				}
 			}, 300);
 		};
 
-		const resizeObserver = new ResizeObserver(handleResize);
+		const debounceResizeObserver = new ResizeObserver(handleResize);
 
 		if (sliderContainerRef.current)
-			resizeObserver.observe(sliderContainerRef.current);
+			debounceResizeObserver.observe(sliderContainerRef.current);
 
 		return () => {
 			if (sliderContainerRef.current)
-				resizeObserver.unobserve(sliderContainerRef.current);
+				debounceResizeObserver.unobserve(sliderContainerRef.current);
 		};
 	}, []);
-
-	useEffect(() => {
-		if (sliderContainerRef.current) {
-			const width = sliderContainerRef.current.offsetWidth;
-
-			setImgWidth(width);
-
-			if (initialRender.current && enableLoop) {
-				setTransitionEnabled(false);
-				setOffset(-width);
-				initialRender.current = false;
-			} else {
-				setOffset(enableLoop ? -width : 0);
-			}
-			setIdx(enableLoop ? 1 : 0);
-		}
-	}, [imgWidth]);
 
 	useEffect(() => {
 		if (!enableDrag) return;
@@ -135,14 +138,14 @@ const ImageSlider = ({
 		) as HTMLElement;
 
 		const startMouse = (e: MouseEvent) => {
-			setTransitionEnabled(false);
+			transitionEnabled.current = false;
 			travel = e.clientX - initDragPos;
 			travelRatio = travel / imgWidth;
 			setOffset(originOffset + travel);
 		};
 
 		const stopMouse = () => {
-			setTransitionEnabled(true);
+			transitionEnabled.current = true;
 			if (Math.abs(travelRatio) > 0.2) {
 				const newIdx =
 					travelRatio > 0
@@ -161,7 +164,7 @@ const ImageSlider = ({
 			e.preventDefault();
 			if (!isMoving.current) {
 				isMoving.current = true;
-				setTransitionEnabled(false);
+				transitionEnabled.current = false;
 				travelRatio = 0;
 				initDragPos = e.clientX;
 				originOffset = offset;
@@ -187,11 +190,11 @@ const ImageSlider = ({
 	const handleTransitionEnd = () => {
 		if (enableLoop) {
 			if (idx === 0) {
-				setTransitionEnabled(false);
+				transitionEnabled.current = false;
 				setIdx(images.length);
 				setOffset(-images.length * imgWidth);
 			} else if (idx === totalChildren - 1) {
-				setTransitionEnabled(false);
+				transitionEnabled.current = false;
 				setIdx(1);
 				setOffset(1 * -imgWidth);
 			}
@@ -207,14 +210,10 @@ const ImageSlider = ({
 		if (!isMoving.current) {
 			let newIdx = idx + direction;
 			if (enableLoop) {
-				if (newIdx >= totalChildren) {
-					newIdx = 1;
-				} else if (newIdx <= -1) {
-					newIdx = totalChildren - 2;
-				}
-			} else {
-				newIdx = Math.max(0, Math.min(totalChildren - 1, newIdx));
-			}
+				if (newIdx >= totalChildren) newIdx = 1;
+				else if (newIdx <= -1) newIdx = totalChildren - 2;
+			} else newIdx = Math.max(0, Math.min(totalChildren - 1, newIdx));
+
 			isMoving.current = true;
 			setIdx(newIdx);
 			setOffset(-newIdx * imgWidth);
@@ -228,18 +227,18 @@ const ImageSlider = ({
 		const indicators = Array.from(
 			{ length: enableLoop ? totalChildren - 2 : totalChildren },
 			(_, _idx) => {
-				let indicatorIdx = enableLoop ? _idx + 1 : _idx;
+				_idx = enableLoop ? _idx + 1 : _idx;
 				let hoverFlag = true;
 				let backgroundColor: string;
 
 				if (enableLoop) {
-					if (idx === totalChildren - 1 && indicatorIdx === 1) {
+					if (idx === totalChildren - 1 && _idx === 1) {
 						backgroundColor = dotColor;
 						hoverFlag = false;
-					} else if (idx === 0 && indicatorIdx === totalChildren - 2) {
+					} else if (idx === 0 && _idx === totalChildren - 2) {
 						backgroundColor = dotColor;
 						hoverFlag = false;
-					} else if (indicatorIdx === idx) {
+					} else if (_idx === idx) {
 						backgroundColor = dotColor;
 						hoverFlag = false;
 					} else {
@@ -257,7 +256,7 @@ const ImageSlider = ({
 						$dotBorderColor={dotBorderColor}
 						$hoverFlag={hoverFlag}
 						$dotSize={dotSize}
-						onClick={() => onClickIndicator(_idx + 1)}
+						onClick={() => onClickIndicator(_idx)}
 						key={_idx}
 					/>
 				);
@@ -267,33 +266,66 @@ const ImageSlider = ({
 		return <>{indicators}</>;
 	};
 
+	const RenderLeftArrow = (): any => {
+		if (!showArrows) return;
+		else if (!enableLoop && idx === 0) return;
+		else {
+			return (
+				<Styled.Button
+					onClick={() => navigate(-1)}
+					className="left"
+					$arrowColor={arrowColor}
+					$arrowSize={arrowSize}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="1em"
+						height="1em"
+						viewBox="0 0 20 20"
+					>
+						<g fill="currentColor">
+							<path d="m12.384 15.68l-5-6l-.768.64l5 6z" />
+							<path d="m11.616 16.32l-5-6c-.427-.512.341-1.152.768-.64l5 6c.427.512-.341 1.152-.768.64" />
+							<path d="m11.616 3.68l-5 6l.768.64l5-6z" />
+							<path d="m12.384 4.32l-5 6c-.427.512-1.195-.128-.768-.64l5-6c.427-.512 1.195.128.768.64" />
+						</g>
+					</svg>
+				</Styled.Button>
+			);
+		}
+	};
+
+	const RenderRightArrow = (): any => {
+		if (!showArrows) return;
+		else if (!enableLoop && idx === totalChildren - 1) return;
+		else {
+			return (
+				<Styled.Button
+					onClick={() => navigate(1)}
+					className="right"
+					$arrowColor={arrowColor}
+					$arrowSize={arrowSize}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="1em"
+						height="1em"
+						viewBox="0 0 20 20"
+					>
+						<g fill="currentColor">
+							<path d="M7.116 4.32a.5.5 0 1 1 .768-.64l5 6a.5.5 0 0 1-.768.64z" />
+							<path d="M7.884 16.32a.5.5 0 0 1-.768-.64l5-6a.5.5 0 1 1 .768.64z" />
+						</g>
+					</svg>
+				</Styled.Button>
+			);
+		}
+	};
+
 	return (
 		<Styled.Container $width={width} $height={height}>
 			<Styled.SliderContainer>
-				{showArrows ? (
-					<Styled.Button
-						onClick={() => navigate(-1)}
-						className="left"
-						$arrowColor={arrowColor}
-						$arrowSize={arrowSize}
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="1em"
-							height="1em"
-							viewBox="0 0 20 20"
-						>
-							<g fill="currentColor">
-								<path d="m12.384 15.68l-5-6l-.768.64l5 6z" />
-								<path d="m11.616 16.32l-5-6c-.427-.512.341-1.152.768-.64l5 6c.427.512-.341 1.152-.768.64" />
-								<path d="m11.616 3.68l-5 6l.768.64l5-6z" />
-								<path d="m12.384 4.32l-5 6c-.427.512-1.195-.128-.768-.64l5-6c.427-.512 1.195.128.768.64" />
-							</g>
-						</svg>
-					</Styled.Button>
-				) : (
-					""
-				)}
+				<RenderLeftArrow />
 				<Styled.SliderImgContainer
 					ref={sliderContainerRef}
 					$width={width}
@@ -302,7 +334,7 @@ const ImageSlider = ({
 				>
 					<Styled.ImgInnerContainer
 						$offset={offset}
-						$transitionEnabled={transitionEnabled}
+						$transitionEnabled={transitionEnabled.current}
 						$duration={duration}
 						className="img-inner-container"
 						onTransitionEnd={handleTransitionEnd}
@@ -320,28 +352,7 @@ const ImageSlider = ({
 						})}
 					</Styled.ImgInnerContainer>
 				</Styled.SliderImgContainer>
-				{showArrows ? (
-					<Styled.Button
-						onClick={() => navigate(1)}
-						className="right"
-						$arrowColor={arrowColor}
-						$arrowSize={arrowSize}
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="1em"
-							height="1em"
-							viewBox="0 0 20 20"
-						>
-							<g fill="currentColor">
-								<path d="M7.116 4.32a.5.5 0 1 1 .768-.64l5 6a.5.5 0 0 1-.768.64z" />
-								<path d="M7.884 16.32a.5.5 0 0 1-.768-.64l5-6a.5.5 0 1 1 .768.64z" />
-							</g>
-						</svg>
-					</Styled.Button>
-				) : (
-					""
-				)}
+				<RenderRightArrow />
 			</Styled.SliderContainer>
 			{showDots ? (
 				<Styled.IndicatorContainer>
