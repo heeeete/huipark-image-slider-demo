@@ -85,6 +85,15 @@ const App = () => (
 export default App;
 ```
 
+### NextJS와 함께 사용
+```
+import dynamic from "next/dynamic";
+
+const ImageSlider = dynamic(() => import("simple-image-carousel"), {
+	ssr: false,
+});
+```
+
 # English
 The image slider supports lazy loading by default, loading images as they come into view during scrolling.
 | **Props** | **Description** | **Default** | **Type** |
@@ -150,4 +159,13 @@ const App = () => (
 );
 
 export default App;
+```
+
+### with NextJS
+```
+import dynamic from "next/dynamic";
+
+const ImageSlider = dynamic(() => import("simple-image-carousel"), {
+	ssr: false,
+});
 ```
